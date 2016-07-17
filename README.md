@@ -66,7 +66,7 @@ dripDrop; // drip-drop.umd.js can define dripDrop globally if you really
 
 Using drip-drop:
 
-**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.
+**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.  
 * `domNode` - The domNode to be set as a drag source (you can then drag from that element).
 * `options`
     * `image` - Can take on one of the following possible values:
@@ -83,12 +83,12 @@ Using drip-drop:
         * `pointerPosition` - An object with the properties `x` and `y` containing the current position of the pointer.
     * `end(e)` - This function will be called when the drag event has been either completed or canceled.
 
-**`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.
+**`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events. 
 * `domNode` - The domNode to be set as a drop-zone.
 * `options`
     * `allow` - A list of types to allow the event handlers be called for. If this is passed and the current drag operation doesn't have an allowed type, the handlers will not be called. If this isn't passed, all types are allowed.
     * `enter(types, e)` - A function called when a drag action enters the node
-        * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. *Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.* Also note that the data associated with the types is only available in the 'drop' event.
+        * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. *Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.* Also note that the data associated with the types is only available in the 'drop' event for security reasons (*imagine if someone was dragging a password from one program to another, but passed over a browser window first*).
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
     * `move(types, pointerPosition, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).
         * `pointerPosition` - An object with the properties `x` and `y` containing the current position of the pointer.
@@ -102,7 +102,7 @@ Using drip-drop:
 
 **`dd.dontPreventDefault`** - Unsets some document-level handlers that prevent the defaults for 'dragenter' and 'dragover'. If you call this, you will need to call `event.preventDefault()` in the appropriate `dd.drop` 'event' and 'move' handlers.
 
-**`dd.ghostItem(domNode[, zIndex])`** - Returns a semi-transparent clone of the passed dom node ready to be moved with `dd.moveAbsoluteNode`.
+**`dd.ghostItem(domNode[, zIndex])`** - Returns a semi-transparent clone of the passed dom node ready to be moved with `dd.moveAbsoluteNode`.  
     * zIndex - (Default: 1000) - The zIndex to give to the returned clone.
 
 **`dd.moveAbsoluteNode(domNode, x, y)`** -  Moves an absolutely positioned element to the position by x and y.
