@@ -107,6 +107,24 @@ Using drip-drop:
 
 *** `dd.moveAbsoluteNode(domNode, x, y)`*** -  Moves an absolutely positioned element to the position by x and y.
 
+### File uploading example:
+
+```javascript
+dd.drop(myDropzone, {
+    drop: function(data, pointer, e) {
+        if(data.Files) {
+          data.Files.forEach(function(file) {
+              console.log("Name: "+file.name)
+              console.log("Size: "+file.size)
+              var fileContents = file.getText()
+              // do something with the contents
+          })
+        }
+    }
+})
+
+```
+
 ### `ghostItem` and `moveAbsoluteNode` example
 
 These two functions are basic helper functions for doing the common drag visualization of creating a semi-transparent clone of what you're dragging and moving it along with your mouse.
