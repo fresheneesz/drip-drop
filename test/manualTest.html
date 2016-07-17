@@ -1,0 +1,77 @@
+<head>
+<body>
+    <div id="hi">
+        <span id="hiSpan">Hi</span>
+    </div>
+    <div id="ho">
+        <span id="hoInner">Drop here</span>
+    </div>
+</body>
+<style>
+    #hi {
+        background-color: black;
+        margin: 20px;
+    }
+    #hiSpan {
+        background-color: yellow;
+    }
+    #ho {
+        background-color: green;
+        text-align: center;
+        height: 50px;
+        color: white;
+    }
+    #hoInner {
+        display: inline-block;
+        height: 40px;
+    }
+</style>
+<script src="../dist/dripDrop.umd.js"></script>
+<script>
+    var hi = document.getElementById('hiSpan')
+    var ho = document.getElementById('ho')
+    var hoInner = document.getElementById('hoInner')
+
+
+    var ghostItem;
+    dripDrop.drag(hi, {
+        start: function(setData, e) {
+            console.log('start')
+            setData("B", "NOT THE BEES")
+
+            ghostItem = dripDrop.ghostItem(hi.parentNode)
+            document.body.appendChild(ghostItem)
+        },
+        move: function(pointer) {
+            console.log('drag move')
+            dripDrop.moveAbsoluteNode(ghostItem, pointer.x, pointer.y)
+        },
+        end: function() {
+            console.log('end')
+            document.body.removeChild(ghostItem)
+        }
+    })
+    dripDrop.drop(ho, {
+        enter: function() {
+            console.log("enter")
+        },
+        leave: function() {
+            console.log("leave")
+        },
+        move: function() {
+            console.log('drop move')
+        },
+        drop: function(data) {
+            if(console.dir) console.dir(data)
+            console.log('drop: '+data.B)
+
+            hoInner.innerHTML = "dropped: "+data.B
+            hoInner.style.backgroundColor = 'teal'
+            setTimeout(function() {
+                hoInner.innerHTML = "Drop here"
+                hoInner.style.backgroundColor = 'transparent'
+            }, 2000)
+        }
+    })
+</script>
+</head>

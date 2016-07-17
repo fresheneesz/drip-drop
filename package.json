@@ -1,0 +1,17 @@
+{"name":"drip-drop",
+ "version":"0.0.1",
+ "main":"drip-drop.js",
+ "description": "A simple generalized drag-and-drop module that abstracts away most of the drag-and-drop APIs weirdness and surprises.",
+ "keywords": [
+    "drag", "drop", "drag-and-drop", "dragndrop", "file upload", "upload"
+ ],
+ "dependencies":{
+ },
+ "devDependencies": {
+     "build-modules":"2"
+ },
+ "repository": {
+   "type": "git",
+   "url": "git://github.com/Tixit/drip-drop"
+ }
+}
