@@ -164,6 +164,7 @@ How to submit pull requests:
 Change Log
 =========
 
+* 0.0.2 - Implementing allowedEffect and documenting dropEffect.
 * 0.0.1 - first commit!
 
 License
