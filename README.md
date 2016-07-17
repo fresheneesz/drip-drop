@@ -103,7 +103,7 @@ Using drip-drop:
 **`dd.dontPreventDefault`** - Unsets some document-level handlers that prevent the defaults for 'dragenter' and 'dragover'. If you call this, you will need to call `event.preventDefault()` in the appropriate `dd.drop` 'event' and 'move' handlers.
 
 **`dd.ghostItem(domNode[, zIndex])`** - Returns a semi-transparent clone of the passed dom node ready to be moved with `dd.moveAbsoluteNode`.  
-    * zIndex - (Default: 1000) - The zIndex to give to the returned clone.
+* zIndex - (Default: 1000) - The zIndex to give to the returned clone.
 
 **`dd.moveAbsoluteNode(domNode, x, y)`** -  Moves an absolutely positioned element to the position by x and y.
 
