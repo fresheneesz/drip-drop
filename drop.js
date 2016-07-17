@@ -51,7 +51,7 @@ var drop = module.exports = function(node, options) {
                     dropEffect = options.move(curTypes, recentMousePos, e)
             }
 
-            e.dataTransfer.dropEffect=dropEffect
+            if(dropEffect) e.dataTransfer.dropEffect=dropEffect
         })
     }
     if(options.leave) {

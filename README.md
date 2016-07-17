@@ -74,7 +74,7 @@ Using drip-drop:
         * `true` - The default generated drag image.
         * `aString` - The path to an image to show next to the cursor while dragging.
         * `imageObject` - If this is an [Image object](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image), the image it represents will be used
-    * `start(setData, e)` - This function will be called when dragging starts. Use setData to set the data for each type.
+    * `start(setData, e)` - This function will be called when dragging starts. Use setData to set the data for each type. The return value of this is the [allowedEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed) - defaults to "all".
         * `setData(type,stringData)` - Sets data for a particular type.
             * NOTE: In an attempt mitigate type lower-casing weirdness, capitals will be converted to dash-lowercase *and* lowercase without dashes. Drip-drop's `drop` function will convert back to camel case. **Eg. using the type "camelCase" will set the value on both the type "camelcase" and "camel-case".**
             * CAVEAT: Internet Explorer only allows two possible values for 'type': `"text"` and `"url"`. IE isn't making any friends here. Complain about it here: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/329509/
@@ -90,7 +90,7 @@ Using drip-drop:
     * `enter(types, e)` - A function called when a drag action enters the node
         * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. **Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.** Also note that the data associated with the types is only available in the 'drop' event.
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
-    * `move(types, pointerPosition, e)` - This function will be called when the drag event moves position over the drop-zone.
+    * `move(types, pointerPosition, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).
         * `pointerPosition` - An object with the properties `x` and `y` containing the current position of the pointer.
     * `leave(types,e)` - A function called with the dragging pointer moves out of the node or is canceled.
     * `drop(data, pointerPosition, e)` - This function will be called when the dragging pointer releases above the node.

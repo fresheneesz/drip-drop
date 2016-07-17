@@ -35,13 +35,15 @@ var drag = module.exports = function(node, options) {
             }
 
             var dataTransfer = e.dataTransfer
-            options.start(function(type, string) {
+            var effectAllowed = options.start(function(type, string) {
                 dataTransfer.setData(type, string)
                 var mappedType = mapFromCamelCase(type)
                 if(mappedType !== type) {
                     dataTransfer.setData(mappedType, string)
                 }
             }, e)
+
+            if(effectAllowed) e.dataTransfer.effectAllowed = effectAllowed
 
             if(options.move) {
                 var recentMousePos
