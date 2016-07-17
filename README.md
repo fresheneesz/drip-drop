@@ -66,7 +66,7 @@ dripDrop; // drip-drop.umd.js can define dripDrop globally if you really
 
 Using drip-drop:
 
-***`dd.drag(domNode, options)`*** - Sets up drag-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.
+**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.
 * `domNode` - The domNode to be set as a drag source (you can then drag from that element).
 * `options`
     * `image` - Can take on one of the following possible values:
@@ -76,19 +76,19 @@ Using drip-drop:
         * `imageObject` - If this is an [Image object](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image), the image it represents will be used
     * `start(setData, e)` - This function will be called when dragging starts. Use setData to set the data for each type. The return value of this is the [allowedEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed) - defaults to "all".
         * `setData(type,stringData)` - Sets data for a particular type.
-            * NOTE: In an attempt mitigate type lower-casing weirdness, capitals will be converted to dash-lowercase *and* lowercase without dashes. Drip-drop's `drop` function will convert back to camel case. **Eg. using the type "camelCase" will set the value on both the type "camelcase" and "camel-case".**
+            * NOTE: In an attempt mitigate type lower-casing weirdness, capitals will be converted to dash-lowercase *and* lowercase without dashes. Drip-drop's `drop` function will convert back to camel case. *Eg. using the type "camelCase" will set the value on both the type "camelcase" and "camel-case".*
             * CAVEAT: Internet Explorer only allows two possible values for 'type': `"text"` and `"url"`. IE isn't making any friends here. Complain about it here: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/329509/
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
     * `move(pointerPosition, e)` - This function will be called when the drag event moves position.
         * `pointerPosition` - An object with the properties `x` and `y` containing the current position of the pointer.
     * `end(e)` - This function will be called when the drag event has been either completed or canceled.
 
-***`dd.drop(domNode, options)`*** - Sets up drop-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.
+**`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.
 * `domNode` - The domNode to be set as a drop-zone.
 * `options`
     * `allow` - A list of types to allow the event handlers be called for. If this is passed and the current drag operation doesn't have an allowed type, the handlers will not be called. If this isn't passed, all types are allowed.
     * `enter(types, e)` - A function called when a drag action enters the node
-        * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. **Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.** Also note that the data associated with the types is only available in the 'drop' event.
+        * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. *Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.* Also note that the data associated with the types is only available in the 'drop' event.
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
     * `move(types, pointerPosition, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).
         * `pointerPosition` - An object with the properties `x` and `y` containing the current position of the pointer.
@@ -100,12 +100,12 @@ Using drip-drop:
                 * `getBuffer(errback)` - Returns a Buffer of the file contents in a call to the the errback.
              * For any other type, the value is a string of data in a format depending on the type
 
-***`dd.dontPreventDefault`*** - Unsets some document-level handlers that prevent the defaults for 'dragenter' and 'dragover'. If you call this, you will need to call `event.preventDefault()` in the appropriate `dd.drop` 'event' and 'move' handlers.
+**`dd.dontPreventDefault`** - Unsets some document-level handlers that prevent the defaults for 'dragenter' and 'dragover'. If you call this, you will need to call `event.preventDefault()` in the appropriate `dd.drop` 'event' and 'move' handlers.
 
-***`dd.ghostItem(domNode[, zIndex])`*** - Returns a semi-transparent clone of the passed dom node ready to be moved with `dd.moveAbsoluteNode`.
+**`dd.ghostItem(domNode[, zIndex])`** - Returns a semi-transparent clone of the passed dom node ready to be moved with `dd.moveAbsoluteNode`.
     * zIndex - (Default: 1000) - The zIndex to give to the returned clone.
 
-*** `dd.moveAbsoluteNode(domNode, x, y)`*** -  Moves an absolutely positioned element to the position by x and y.
+**`dd.moveAbsoluteNode(domNode, x, y)`** -  Moves an absolutely positioned element to the position by x and y.
 
 ### File uploading example:
 
