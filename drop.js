@@ -98,7 +98,8 @@ function buildDataObject(dt) {
     if(dt.files.length > 0) {
         data.Files = dt.files
     }
-    dt.types.forEach(function(type) {
+    for(var j=0; j<dt.types.length; j++) {
+        var type = dt.types[j]
         if(type === 'Files') {
             data.Files = dt.files
             for(var n=0;n<data.Files.length;n++) {
@@ -117,7 +118,7 @@ function buildDataObject(dt) {
                 attachGetter(data, dt, mappedType)
             }
         }
-    })
+    }
 
     return data
 }
