@@ -34,10 +34,10 @@ var drop = module.exports = function(node, options) {
         }
     }
 
-    var dropInfo = {node:node}, curTypes, dragEnterCount=0
+    var dropInfo = {node:node}, curTypes, dragCounter = 0
     node.addEventListener('dragenter', dropInfo.enter = function(e) {
-        dragEnterCount++
-        if(dragEnterCount-1 === dragLeaveCount) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
+        dragCounter++
+        if(dragCounter === 1) { // browsers stupidly emits dragenter whenever crossing over a child boundary..
             var data = buildDataObject(e.dataTransfer)
             curTypes = Object.keys(data)
             if(options.enter !== undefined && isAllowed(curTypes)) {
@@ -58,10 +58,9 @@ var drop = module.exports = function(node, options) {
         })
     }
 
-    var dragLeaveCount=0
     node.addEventListener('dragleave', dropInfo.leave = function(e) {
-        dragLeaveCount++
-        if(dragEnterCount === dragLeaveCount) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
+        dragCounter--
+        if(dragCounter === 0) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
             if(options.leave && isAllowed(curTypes))
                 options.leave(curTypes,e)
         }
@@ -73,6 +72,8 @@ var drop = module.exports = function(node, options) {
                 var data = buildDataObject(e.dataTransfer)
                 options.drop(data, {x:e.pageX,  y:e.pageY}, e)
             }
+
+            dragCounter=0 // reset
         })
     }
 
