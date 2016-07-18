@@ -179,7 +179,7 @@ How to submit pull requests:
 
 Change Log
 =========
-* 0.0.4 - Fixing dragleave failing to fire sometimes and fixing dragenter firin
+* 0.0.4 - Fixing dragleave failing to fire sometimes and fixing dragenter firing too often
 * 0.0.3
   * Removing errant `e.preventDefault()` that was breaking this
   * Removing extraneous pointer position arguments
