@@ -31,7 +31,6 @@ var drag = module.exports = function(node, options) {
                 }
             } else {
                 e.dataTransfer.setDragImage(new Image, 0,0) // no image
-                e.preventDefault()
             }
 
             var dataTransfer = e.dataTransfer
@@ -50,7 +49,7 @@ var drag = module.exports = function(node, options) {
                 document.addEventListener('dragover', dragInfo.docOver = function(e) {
                     if(recentMousePos === undefined || e.pageX !== recentMousePos.x || e.pageY !== recentMousePos.y) {
                         recentMousePos = {x:e.pageX,  y:e.pageY}
-                        options.move(recentMousePos, e)
+                        options.move(e)
                     }
                 })
 

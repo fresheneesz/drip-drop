@@ -42,9 +42,9 @@
             ghostItem = dripDrop.ghostItem(hi.parentNode)
             document.body.appendChild(ghostItem)
         },
-        move: function(pointer) {
+        move: function(e) {
             console.log('drag move')
-            dripDrop.moveAbsoluteNode(ghostItem, pointer.x, pointer.y)
+            dripDrop.moveAbsoluteNode(ghostItem, e.pageX, e.pageY)
         },
         end: function() {
             console.log('end')

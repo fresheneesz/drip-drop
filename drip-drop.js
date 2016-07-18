@@ -35,5 +35,8 @@ document.addEventListener('dragenter',docEnterHandler=function(e){
 document.addEventListener('dragover',docOverHandler=function(e){
     e.preventDefault()
 })
+//document.addEventListener('dragstart',docOverHandler=function(e){
+//    e.preventDefault()
+//})
 
 

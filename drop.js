@@ -6,10 +6,10 @@
             // If this isn't passed, all types are allowed.
     // enter(types, e) - A function called when a drag action enters the node
         // types - The data types available on drop
-    // move(types, mousePos, e) - A function called with the dragging pointer moves over the node
+    // move(types, e) - A function called with the dragging pointer moves over the node
         // IMPORTANT: 'data' will contain the correct keys, but will *not* actually contain any data. Blame the stupid html5 drag and drop api.
     // leave(types, e) - A function called with the dragging pointer moves out of the node
-    // drop(data, mousePos, e) - A function called when the dragging pointer releases above the node
+    // drop(data, e) - A function called when the dragging pointer releases above the node
         // data - An object where each key is a data type, where if that type contains dashes, the type will be available as is *and* with dash-lowercase converted to camel case
             // The value is either:
              // For the 'Files' type, the value is a list of files, each with a set of properties described here: https://developer.mozilla.org/en-US/docs/Web/API/File .
@@ -48,7 +48,7 @@ var drop = module.exports = function(node, options) {
             if(recentMousePos === undefined || e.pageX !== recentMousePos.x || e.pageY !== recentMousePos.y) {
                 recentMousePos = {x:e.pageX,  y:e.pageY}
                 if(isAllowed(curTypes))
-                    dropEffect = options.move(curTypes, recentMousePos, e)
+                    dropEffect = options.move(curTypes, e)
             }
 
             if(dropEffect) e.dataTransfer.dropEffect=dropEffect

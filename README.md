@@ -24,7 +24,7 @@ dd.drag(myDomNode, {
     }
 })
 dd.drop(myDropzone, {
-    drop: function(data, pointer, e) {
+    drop: function(data, e) {
         myDropzone.innerHTML = data.myCustomData
     }
 })
@@ -79,8 +79,7 @@ Using drip-drop:
             * NOTE: In an attempt mitigate type lower-casing weirdness, capitals will be converted to dash-lowercase *and* lowercase without dashes. Drip-drop's `drop` function will convert back to camel case. *Eg. using the type "camelCase" will set the value on both the type "camelcase" and "camel-case".*
             * CAVEAT: Internet Explorer only allows two possible values for 'type': `"text"` and `"url"`. IE isn't making any friends here. Complain about it here: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/329509/
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
-    * `move(pointerPosition, e)` - This function will be called when the drag event moves position.
-        * `pointerPosition` - An object with the properties `x` and `y` containing the current position of the pointer.
+    * `move(e)` - This function will be called when the drag event moves position. *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
     * `end(e)` - This function will be called when the drag event has been either completed or canceled.
 
 **`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events. 
@@ -90,10 +89,9 @@ Using drip-drop:
     * `enter(types, e)` - A function called when a drag action enters the node
         * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. *Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.* Also note that the data associated with the types is only available in the 'drop' event for security reasons (*imagine if someone was dragging a password from one program to another, but passed over a browser window first*).
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
-    * `move(types, pointerPosition, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).
-        * `pointerPosition` - An object with the properties `x` and `y` containing the current position of the pointer.
+    * `move(types, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect). *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
     * `leave(types,e)` - A function called with the dragging pointer moves out of the node or is canceled.
-    * `drop(data, pointerPosition, e)` - This function will be called when the dragging pointer releases above the node.
+    * `drop(data, e)` - This function will be called when the dragging pointer releases above the node.
         * `data` - An object where each key is a data type. If a type contains dashes, the type will be available as-is *and* with dash-lowercase converted to camel case (matching the `types` described above). The value with either be:
              * For the 'Files' type, the value is a list of files, each with a set of properties described here: https://developer.mozilla.org/en-US/docs/Web/API/File . In addition, the files have the methods:
                 * `getText(errback)` - Returns the text of the file in a call to the the errback.
@@ -111,7 +109,7 @@ Using drip-drop:
 
 ```javascript
 dd.drop(myDropzone, {
-    drop: function(data, pointer, e) {
+    drop: function(data, e) {
         if(data.Files) {
           data.Files.forEach(function(file) {
               console.log("Name: "+file.name)
@@ -137,8 +135,8 @@ dd.drag(myDomNode, {
         ghostItem = dd.ghostItem(myDomNode.parent)
         document.body.appendChild(ghostItem)
     }
-    move: function(pointer, event) {
-        dd.moveAbsoluteNode(ghostItem, pointer.x, pointer.y)
+    move: function(event) {
+        dd.moveAbsoluteNode(ghostItem, event.pageX, event.pageY)
     },
     end: function() {
         document.body.removeChild(ghostItem)
