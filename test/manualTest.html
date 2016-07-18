@@ -26,7 +26,7 @@
         height: 40px;
     }
 </style>
-<script src="../dist/dripDrop.umd.js"></script>
+<script src="../dist/dripDrop-dev.umd.js"></script>
 <script>
     var hi = document.getElementById('hiSpan')
     var ho = document.getElementById('ho')
@@ -43,7 +43,7 @@
             document.body.appendChild(ghostItem)
         },
         move: function(e) {
-            console.log('drag move')
+//            console.log('drag move')
             dripDrop.moveAbsoluteNode(ghostItem, e.pageX, e.pageY)
         },
         end: function() {
@@ -59,7 +59,7 @@
             console.log("leave")
         },
         move: function() {
-            console.log('drop move')
+//            console.log('drop move')
         },
         drop: function(data) {
             if(console.dir) console.dir(data)

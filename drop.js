@@ -34,12 +34,15 @@ var drop = module.exports = function(node, options) {
         }
     }
 
-    var dropInfo = {node:node}, curTypes
+    var dropInfo = {node:node}, curTypes, dragEnterCount=0
     node.addEventListener('dragenter', dropInfo.enter = function(e) {
-        var data = buildDataObject(e.dataTransfer)
-        curTypes = Object.keys(data)
-        if(options.enter !== undefined && isAllowed(curTypes)) {
-            options.enter(curTypes,e)
+        dragEnterCount++
+        if(dragEnterCount-1 === dragLeaveCount) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
+            var data = buildDataObject(e.dataTransfer)
+            curTypes = Object.keys(data)
+            if(options.enter !== undefined && isAllowed(curTypes)) {
+                options.enter(curTypes,e)
+            }
         }
     })
     if(options.move) {
@@ -54,14 +57,15 @@ var drop = module.exports = function(node, options) {
             if(dropEffect) e.dataTransfer.dropEffect=dropEffect
         })
     }
-    if(options.leave) {
-        node.addEventListener('dragleave', dropInfo.leave = function(e) {
-            if(!pointerIsOver(e.pageX, e.pageY, node)) { // chrome stupidly emits dragleave when it shouldn't
-                if(isAllowed(curTypes))
-                    options.leave(curTypes,e)
-            }
-        })
-    }
+
+    var dragLeaveCount=0
+    node.addEventListener('dragleave', dropInfo.leave = function(e) {
+        dragLeaveCount++
+        if(dragEnterCount === dragLeaveCount) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
+            if(options.leave && isAllowed(curTypes))
+                options.leave(curTypes,e)
+        }
+    })
     if(options.drop) {
         node.addEventListener('drop', dropInfo.drop = function(e) {
             e.preventDefault()
