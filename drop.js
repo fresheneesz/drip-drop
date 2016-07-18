@@ -70,7 +70,7 @@ var drop = module.exports = function(node, options) {
             e.preventDefault()
             if(isAllowed(curTypes)) {
                 var data = buildDataObject(e.dataTransfer)
-                options.drop(data, {x:e.pageX,  y:e.pageY}, e)
+                options.drop(data, e)
             }
 
             dragCounter=0 // reset

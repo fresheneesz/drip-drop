@@ -12,7 +12,7 @@ This library simply handles drag-and-drop events in all the major cases:
 Example
 =======
 
-It can be this easy
+It can be this easy:
 
 ```javascript
 var dd = require("drip-drop")
@@ -179,6 +179,7 @@ How to submit pull requests:
 
 Change Log
 =========
+* 0.0.6 - Removing left over pointer parameter
 * 0.0.5 - Fixing dragleave and dragenter not being called after the first drop
 * 0.0.4 - Fixing dragleave failing to fire sometimes and fixing dragenter firing too often
 * 0.0.3

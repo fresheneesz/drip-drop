@@ -144,10 +144,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    }
 	
-	    var dropInfo = {node:node}, curTypes, dragCounter= 0
+	    var dropInfo = {node:node}, curTypes, dragCounter = 0
 	    node.addEventListener('dragenter', dropInfo.enter = function(e) {
 	        dragCounter++
-	        if(dragCounter === 1) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
+	        if(dragCounter === 1) { // browsers stupidly emits dragenter whenever crossing over a child boundary..
 	            var data = buildDataObject(e.dataTransfer)
 	            curTypes = Object.keys(data)
 	            if(options.enter !== undefined && isAllowed(curTypes)) {
@@ -173,8 +173,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if(dragCounter === 0) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
 	            if(options.leave && isAllowed(curTypes))
 	                options.leave(curTypes,e)
-	
-	            dragCounter=0 // reset
 	        }
 	    })
 	    if(options.drop) {
@@ -182,7 +180,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	            e.preventDefault()
 	            if(isAllowed(curTypes)) {
 	                var data = buildDataObject(e.dataTransfer)
-	                options.drop(data, {x:e.pageX,  y:e.pageY}, e)
+	                options.drop(data, e)
 	            }
 	
 	            dragCounter=0 // reset
