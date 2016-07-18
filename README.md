@@ -149,7 +149,7 @@ dd.drag(myDomNode, {
 * Handles canceling the default at the appropriate times
 * Prevents dragging a file on the wrong spot from loading that file, which would kill your application (this can be turned off if for some reason you want that behavior)
 * Replaces the 'dragover' event (which fires even when your pointer isn't moving) with the 'move' event (which only fires when your pointer moves)
-* Replaces the 'dragleave' event (which fires even when your pointer doesn't exit the dropzone if it crosses child-node boundaries) with 'leave' (which doesn't do that stupid BS)
+* Replaces the 'dragleave' and 'dragenter' event (which fires even when your pointer doesn't exit/enter the dropzone if it crosses child-node boundaries) with 'leave' and 'enter' (which doesn't do that stupid BS)
 * Allows you to use camelcase in setData 'types' (see description of the 'start' event for caveats)
 * Only 6 event-types to care about (rather than the 8 from the spec)
 * Provides an easy and obvious way to make changes related to the source element on-pointer-move (drag's 'move' event)
