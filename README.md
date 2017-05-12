@@ -30,7 +30,7 @@ dd.drop(myDropzone, {
 })
 ```
 
-Check out the [demo](https://cdn.rawgit.com/Tixit/drip-drop/master/demo.html)!
+Check out the [demo](https://cdn.rawgit.com/fresheneesz/drip-drop/master/demo.html)!
 
 Motivation
 ==========
