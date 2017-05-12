@@ -61,8 +61,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.drag = __webpack_require__(/*! ./drag */ 2)
 	
 	exports.dontPreventDefault = function() {
-	    document.removeEventListener('dragenter', docEnterHandler)
-	    document.removeEventListener('dragover', docOverHandler)
+	    document.removeEventListener('dragenter', docEnterHandler, true)
+	    document.removeEventListener('dragover', docOverHandler, true)
 	}
 	
 	
@@ -90,10 +90,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var docEnterHandler, docOverHandler;
 	document.addEventListener('dragenter',docEnterHandler=function(e){
 	    e.preventDefault()
-	})
+	}, true)
 	document.addEventListener('dragover',docOverHandler=function(e){
 	    e.preventDefault()
-	})
+	}, true)
 	//document.addEventListener('dragstart',docOverHandler=function(e){
 	//    e.preventDefault()
 	//})
@@ -176,7 +176,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	            }
 	
 	            if(dropEffect) e.dataTransfer.dropEffect=dropEffect
-	            if(stopPropCalled) originalStopProp.call(e)
+	            if(stopPropCalled) {
+	                originalStopProp.call(e)
+	            }
 	        })
 	    }
 	
@@ -185,7 +187,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        if(dragCounter === 0) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
 	            if(options.leave && isAllowed(curTypes))
 	                options.leave(curTypes,e)
-	        }  else if(options.out) {
+	        } else if(options.out) {
 	            options.out(curTypes, e)
 	        }
 	    })
@@ -334,10 +336,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	                        recentMousePos = {x:e.pageX,  y:e.pageY}
 	                        options.move(e)
 	                    }
-	                })
+	                }, true)
 	
 	                node.addEventListener('dragend', function dragendHandler() {
-	                    document.removeEventListener('dragover', dragInfo.docOver)
+	                    document.removeEventListener('dragover', dragInfo.docOver, true)
 	                    dragInfo.node.removeEventListener('dragend', dragendHandler)
 	                })
 	            }
@@ -351,7 +353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return function off() {
 	        if(dragInfo.start) dragInfo.node.removeEventListener('dragstart', dragInfo.start)
 	        if(dragInfo.end) dragInfo.node.removeEventListener('dragend', dragInfo.end)
-	        if(dragInfo.docOver) document.removeEventListener('dragover', dragInfo.docOver)
+	        if(dragInfo.docOver) document.removeEventListener('dragover', dragInfo.docOver, true)
 	    }
 	}
 	

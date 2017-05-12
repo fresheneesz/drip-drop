@@ -184,6 +184,7 @@ How to submit pull requests:
 
 Change Log
 =========
+* 1.0.3 - Fixing bug where stopPropagation in a drag move event prevented drop
 * 1.0.1
   * Changing `in` and `out` to fire for every child-node boundary crossing (because I don't think drop zones can be programatically detected)
   * Adding demo

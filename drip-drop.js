@@ -2,8 +2,8 @@ exports.drop = require('./drop')
 exports.drag = require('./drag')
 
 exports.dontPreventDefault = function() {
-    document.removeEventListener('dragenter', docEnterHandler)
-    document.removeEventListener('dragover', docOverHandler)
+    document.removeEventListener('dragenter', docEnterHandler, true)
+    document.removeEventListener('dragover', docOverHandler, true)
 }
 
 
@@ -31,10 +31,10 @@ exports.moveAbsoluteNode = function(node, x, y) {
 var docEnterHandler, docOverHandler;
 document.addEventListener('dragenter',docEnterHandler=function(e){
     e.preventDefault()
-})
+}, true)
 document.addEventListener('dragover',docOverHandler=function(e){
     e.preventDefault()
-})
+}, true)
 //document.addEventListener('dragstart',docOverHandler=function(e){
 //    e.preventDefault()
 //})

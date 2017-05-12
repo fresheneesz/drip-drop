@@ -66,7 +66,9 @@ var drop = module.exports = function(node, options) {
             }
 
             if(dropEffect) e.dataTransfer.dropEffect=dropEffect
-            if(stopPropCalled) originalStopProp.call(e)
+            if(stopPropCalled) {
+                originalStopProp.call(e)
+            }
         })
     }
 
@@ -75,7 +77,7 @@ var drop = module.exports = function(node, options) {
         if(dragCounter === 0) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
             if(options.leave && isAllowed(curTypes))
                 options.leave(curTypes,e)
-        }  else if(options.out) {
+        } else if(options.out) {
             options.out(curTypes, e)
         }
     })
