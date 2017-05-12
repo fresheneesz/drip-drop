@@ -51,10 +51,10 @@ var drag = module.exports = function(node, options) {
                         recentMousePos = {x:e.pageX,  y:e.pageY}
                         options.move(e)
                     }
-                })
+                }, true)
 
                 node.addEventListener('dragend', function dragendHandler() {
-                    document.removeEventListener('dragover', dragInfo.docOver)
+                    document.removeEventListener('dragover', dragInfo.docOver, true)
                     dragInfo.node.removeEventListener('dragend', dragendHandler)
                 })
             }
@@ -68,7 +68,7 @@ var drag = module.exports = function(node, options) {
     return function off() {
         if(dragInfo.start) dragInfo.node.removeEventListener('dragstart', dragInfo.start)
         if(dragInfo.end) dragInfo.node.removeEventListener('dragend', dragInfo.end)
-        if(dragInfo.docOver) document.removeEventListener('dragover', dragInfo.docOver)
+        if(dragInfo.docOver) document.removeEventListener('dragover', dragInfo.docOver, true)
     }
 }
 
