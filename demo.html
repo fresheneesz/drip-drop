@@ -1,0 +1,85 @@
+<body>
+<div id="info"></div>
+<div id="dragbox" draggable="true">Drag me</div>
+<div id="outerDropzone">
+    <div id="text"></div>
+    <div id="innerDropzone">
+        Drop here
+    </div>
+</div>
+         
+<style>
+    #dragbox {
+        height: 80px;width: 80px;
+        background-color: green;      
+    }  
+    #outerDropzone {
+        position: relative;
+        height: 100px;width: 200px;
+        background-color: orangered;     
+    }       
+    #text {
+        position: absolute;
+    }
+    #innerDropzone {
+        position: absolute;
+        margin: 25px;
+        height: 50px;width: 150px;
+        background-color: dodgerblue;     
+    }
+</style>
+
+<script src="dist/dripDrop-dev.umd.js"></script>
+<script>
+    var dragbox = document.getElementById("dragbox")
+    var outerDropzone = document.getElementById("outerDropzone")
+    var outerDropzoneText = document.getElementById("text")
+    var innerDropzone = document.getElementById("innerDropzone")
+
+    dripDrop.drag(dragbox, {
+        image: true, // default drag image
+        start: function(setData, e) {
+            setData('myCustomData', JSON.stringify({a:1, b:"NOT THE BEES"})) // camel case types are allowed!*
+            dragbox.innerHTML = 'dragging started'
+        },
+        move: function() {
+            dragbox.innerHTML = 'dragging..'
+        },
+        end: function() {
+            dragbox.innerHTML = 'drug'
+        }
+    })
+           
+    dripDrop.drop(outerDropzone, {
+        enter: function() {
+            outerDropzoneText.innerHTML = 'hi'   
+        },
+        move: function(data, e) {
+            outerDropzoneText.innerHTML += '.'
+        },  
+        leave: function() {
+            outerDropzoneText.innerHTML = 'bye'   
+        },
+        drop: function() {
+            outerDropzoneText.innerHTML = "I don't want this junk!"   
+        }
+    })
+    dripDrop.drop(innerDropzone, {
+        enter: function() {
+            innerDropzone.innerHTML = 'hi'   
+        },
+        move: function(data, e) {
+//            e.stopPropagation()
+            innerDropzone.innerHTML += '.'
+        },  
+        leave: function() {
+            innerDropzone.innerHTML = 'bye'   
+        },
+        drop: function(data, e) {
+            e.stopPropagation()
+            innerDropzone.innerHTML = data.myCustomData
+        }
+    })
+    
+</script>
+</body>

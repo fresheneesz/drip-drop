@@ -45,7 +45,7 @@ var drop = module.exports = function(node, options) {
             if(options.enter !== undefined && isAllowed(curTypes)) {
                 options.enter(curTypes,e)
             }
-        } else if(dragCounter === 2 && options.in) {
+        } else if(options.in) {
             options.in(curTypes, e)
         }
     })
@@ -75,7 +75,7 @@ var drop = module.exports = function(node, options) {
         if(dragCounter === 0) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
             if(options.leave && isAllowed(curTypes))
                 options.leave(curTypes,e)
-        }  else if(dragCounter === 1 && options.out) {
+        }  else if(options.out) {
             options.out(curTypes, e)
         }
     })
