@@ -156,15 +156,23 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    })
 	    if(options.move) {
-	        var recentMousePos, dropEffect = 'copy';
+	        var recentMousePos, dropEffect = 'copy', stopPropCalled;
 	        node.addEventListener('dragover', dropInfo.over = function(e) {
+	            var originalStopProp = e.stopPropagation
+	            e.stopPropagation = function() {
+	                stopPropCalled = true
+	            }
+	            
 	            if(recentMousePos === undefined || e.pageX !== recentMousePos.x || e.pageY !== recentMousePos.y) {
 	                recentMousePos = {x:e.pageX,  y:e.pageY}
-	                if(isAllowed(curTypes))
+	                if(isAllowed(curTypes)) {
+	                    stopPropCalled = false
 	                    dropEffect = options.move(curTypes, e)
+	                }
 	            }
 	
 	            if(dropEffect) e.dataTransfer.dropEffect=dropEffect
+	            if(stopPropCalled) originalStopProp.call(e)
 	        })
 	    }
 	

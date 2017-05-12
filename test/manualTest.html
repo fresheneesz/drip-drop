@@ -9,8 +9,19 @@
             <span>here</span>
         </div>
     </div>
+
+    
+    <div id="myDomNode"></div>
+    <div id="myDropzone">
+        <div id="myDropzone2">
+        
+        </div>
+    </div>
 </body>
 <style>
+    body {
+        margin: 0;
+    }
     #hi {
         background-color: black;
         margin: 20px;
@@ -27,7 +38,18 @@
     #hoInner {
         display: inline-block;
         height: 40px;
-    }
+    }          
+    
+    #myDomNode, #myDropzone2 {
+        height: 50px;width: 50px;
+    }  
+    
+    #myDomNode {
+        background-color: red;       
+    } 
+    #myDropzone2 {
+        background-color: blue;       
+    } 
 </style>
 <script src="../dist/dripDrop-dev.umd.js"></script>
 <script>
@@ -62,7 +84,7 @@
             console.log("leave")
         },
         move: function() {
-//            console.log('drop move')
+            console.log('drop move')
         },
         drop: function(data) {
             if(console.dir) console.dir(data)
@@ -77,4 +99,33 @@
         }
     })
 </script>
+
+
+
+<script>
+    var myDropzone = document.getElementById("myDropzone")
+    var myDropzone2 = document.getElementById("myDropzone2")
+    var myDomNode = document.getElementById("myDomNode")
+    
+    dripDrop.drag(myDomNode, {
+        dragImage: true, // default drag image
+        start: function(setData, e) {
+            setData('myCustomData', JSON.stringify({a:1, b:"NOT THE BEES"})) // camel case types are allowed!*
+        }
+    })
+    dripDrop.drop(myDropzone2, {
+        drop: function(data, e) {
+            myDropzone2.innerHTML = data.myCustomData
+        },
+        move: function(types, e) {
+            e.stopPropagation()
+        }
+    })
+    dripDrop.drop(myDropzone, {
+        move: function(e) {
+            console.log("FUCK")
+        }
+    })
+</script>
+
 </head>

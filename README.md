@@ -77,7 +77,7 @@ Using drip-drop:
     * `start(setData, e)` - This function will be called when dragging starts. Use setData to set the data for each type. The return value of this is the [allowedEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed) - defaults to "all".
         * `setData(type,stringData)` - Sets data for a particular type.
             * NOTE: In an attempt mitigate type lower-casing weirdness, capitals will be converted to dash-lowercase *and* lowercase without dashes. Drip-drop's `drop` function will convert back to camel case. *Eg. using the type "camelCase" will set the value on both the type "camelcase" and "camel-case".*
-            * CAVEAT: Internet Explorer only allows two possible values for 'type': `"text"` and `"url"`. IE isn't making any friends here. Complain about it here: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/329509/
+            * CAVEAT: Internet Explorer only allows two possible values for 'type': `"text"` and `"url"`. IE isn't making any friends here. Complain about it: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/329509/
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
     * `move(e)` - This function will be called when the drag event moves position. *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
     * `end(e)` - This function will be called when the drag event has been either completed or canceled.
@@ -179,6 +179,7 @@ How to submit pull requests:
 
 Change Log
 =========
+* 0.0.7 - Fixing bug where stopPropagation wasn't working consistently for dragover events
 * 0.0.6 - Removing left over pointer parameter
 * 0.0.5 - Fixing dragleave and dragenter not being called after the first drop
 * 0.0.4 - Fixing dragleave failing to fire sometimes and fixing dragenter firing too often
