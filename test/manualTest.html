@@ -13,8 +13,10 @@
     
     <div id="myDomNode"></div>
     <div id="myDropzone">
-        <div id="myDropzone2">
-        
+        <div id="shunk">
+            <div id="myDropzone2">
+            
+            </div>
         </div>
     </div>
 </body>
@@ -76,6 +78,7 @@
             document.body.removeChild(ghostItem)
         }
     })
+    
     dripDrop.drop(ho, {
         enter: function() {
             console.log("enter")
@@ -104,6 +107,7 @@
 
 <script>
     var myDropzone = document.getElementById("myDropzone")
+    var shunk = document.getElementById("shunk")
     var myDropzone2 = document.getElementById("myDropzone2")
     var myDomNode = document.getElementById("myDomNode")
     
@@ -121,9 +125,26 @@
             e.stopPropagation()
         }
     })
+    dripDrop.drop(shunk, {
+        drop: function(data, e) {
+            
+        },
+        move: function(types, e) {
+            
+        }
+    })
     dripDrop.drop(myDropzone, {
+        enter: function() {
+            console.log("whtsa")
+        },
+        in: function() {
+            console.log('in')
+        },
+        out: function() {
+            console.log('out')
+        },
         move: function(e) {
-            console.log("FUCK")
+            console.log("parent drop zone move")
         }
     })
 </script>

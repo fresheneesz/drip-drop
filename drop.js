@@ -9,6 +9,8 @@
     // move(types, e) - A function called with the dragging pointer moves over the node
         // IMPORTANT: 'data' will contain the correct keys, but will *not* actually contain any data. Blame the stupid html5 drag and drop api.
     // leave(types, e) - A function called with the dragging pointer moves out of the node
+    // in(types, e) - A function called when the dragging pointer crosses in over a child-boundary of a descendant node that is also a drop zone 
+    // out(types, e) - A function called when the dragging pointer crosses out over a child-boundary of a descendant node that is also a drop zone
     // drop(data, e) - A function called when the dragging pointer releases above the node
         // data - An object where each key is a data type, where if that type contains dashes, the type will be available as is *and* with dash-lowercase converted to camel case
             // The value is either:
@@ -43,6 +45,8 @@ var drop = module.exports = function(node, options) {
             if(options.enter !== undefined && isAllowed(curTypes)) {
                 options.enter(curTypes,e)
             }
+        } else if(dragCounter === 2 && options.in) {
+            options.in(curTypes, e)
         }
     })
     if(options.move) {
@@ -71,6 +75,8 @@ var drop = module.exports = function(node, options) {
         if(dragCounter === 0) { // browsers stupidly emits dragleave whenever crossing over a child boundary..
             if(options.leave && isAllowed(curTypes))
                 options.leave(curTypes,e)
+        }  else if(dragCounter === 1 && options.out) {
+            options.out(curTypes, e)
         }
     })
     if(options.drop) {

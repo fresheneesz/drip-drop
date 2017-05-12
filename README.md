@@ -89,7 +89,9 @@ Using drip-drop:
     * `enter(types, e)` - A function called when a drag action enters the node
         * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. *Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.* Also note that the data associated with the types is only available in the 'drop' event for security reasons (*imagine if someone was dragging a password from one program to another, but passed over a browser window first*).
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
+    * `in(types, e)` - A function called when the dragging pointer crosses in over a child-boundary of a descendant node that is also a drop zone
     * `move(types, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect). *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
+    * `out(types, e)` - A function called when the dragging pointer crosses out over a child-boundary of a descendant node that is also a drop zone
     * `leave(types,e)` - A function called with the dragging pointer moves out of the node or is canceled.
     * `drop(data, e)` - This function will be called when the dragging pointer releases above the node.
         * `data` - An object where each key is a data type. If a type contains dashes, the type will be available as-is *and* with dash-lowercase converted to camel case (matching the `types` described above). The value with either be:
@@ -150,6 +152,7 @@ dd.drag(myDomNode, {
 * Prevents dragging a file on the wrong spot from loading that file, which would kill your application (this can be turned off if for some reason you want that behavior)
 * Replaces the 'dragover' event (which fires even when your pointer isn't moving) with the 'move' event (which only fires when your pointer moves)
 * Replaces the 'dragleave' and 'dragenter' event (which fires even when your pointer doesn't exit/enter the dropzone if it crosses child-node boundaries) with 'leave' and 'enter' (which doesn't do that stupid BS)
+* Provides the 'in' and 'out' event handlers which fire when your pointer crosses the first child-node boundary of a descendant node that is also a dropzone 
 * Allows you to use camelcase in setData 'types' (see description of the 'start' event for caveats)
 * Only 6 event-types to care about (rather than the 8 from the spec)
 * Provides an easy and obvious way to make changes related to the source element on-pointer-move (drag's 'move' event)
@@ -179,6 +182,7 @@ How to submit pull requests:
 
 Change Log
 =========
+* 1.0.0 - Adding `in` and `out` drop event handlers.
 * 0.0.7 - Fixing bug where stopPropagation wasn't working consistently for dragover events
 * 0.0.6 - Removing left over pointer parameter
 * 0.0.5 - Fixing dragleave and dragenter not being called after the first drop
