@@ -159,6 +159,12 @@ dd.drag(myDomNode, {
 * Only 6 event-types to care about (rather than the 8 from the spec)
 * Provides an easy and obvious way to make changes related to the source element on-pointer-move (drag's 'move' event)
 
+Support
+========
+
+Drip drop should work on all desktop browsers. However, Android and iOS browsers don't support the html5 drag and drop API for touch events.
+So if you want to translate touch events into html5 drag events, you can do that with a polyfill. See here: https://www.codeproject.com/Articles/1091766/Add-support-for-standard-HTML-Drag-and-Drop-operat
+
 Todo
 ======
 
