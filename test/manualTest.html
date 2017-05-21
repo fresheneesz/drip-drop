@@ -70,7 +70,7 @@
             document.body.appendChild(ghostItem)
         },
         move: function(e) {
-//            console.log('drag move')
+            console.log('drag move')
             dripDrop.moveAbsoluteNode(ghostItem, e.pageX, e.pageY)
         },
         end: function() {
@@ -101,16 +101,13 @@
             }, 2000)
         }
     })
-</script>
 
 
-
-<script>
     var myDropzone = document.getElementById("myDropzone")
     var shunk = document.getElementById("shunk")
     var myDropzone2 = document.getElementById("myDropzone2")
     var myDomNode = document.getElementById("myDomNode")
-    
+
     dripDrop.drag(myDomNode, {
         dragImage: true, // default drag image
         start: function(setData, e) {
@@ -127,10 +124,10 @@
     })
     dripDrop.drop(shunk, {
         drop: function(data, e) {
-            
+
         },
         move: function(types, e) {
-            
+
         }
     })
     dripDrop.drop(myDropzone, {

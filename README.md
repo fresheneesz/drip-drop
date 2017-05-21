@@ -68,7 +68,7 @@ dripDrop; // drip-drop.umd.js can define dripDrop globally if you really
 
 Using drip-drop:
 
-**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events.  
+**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. 
 * `domNode` - The domNode to be set as a drag source (you can then drag from that element).
 * `options`
     * `image` - Can take on one of the following possible values:
@@ -76,23 +76,28 @@ Using drip-drop:
         * `true` - The default generated drag image.
         * `aString` - The path to an image to show next to the cursor while dragging.
         * `imageObject` - If this is an [Image object](https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image), the image it represents will be used
-    * `start(setData, e)` - This function will be called when dragging starts. Use setData to set the data for each type. The return value of this is the [allowedEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed) - defaults to "all".
+* Emitted events:
+    * `start(setData, e)` - This function will be called when dragging starts. Use setData to set the data for each type. 
         * `setData(type,stringData)` - Sets data for a particular type.
             * NOTE: In an attempt mitigate type lower-casing weirdness, capitals will be converted to dash-lowercase *and* lowercase without dashes. Drip-drop's `drop` function will convert back to camel case. *Eg. using the type "camelCase" will set the value on both the type "camelcase" and "camel-case".*
             * CAVEAT: Internet Explorer only allows two possible values for 'type': `"text"` and `"url"`. IE isn't making any friends here. Complain about it: https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/329509/
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
+        	* *Note that `e.dataTransfer.effectAllowed` can be set to an [allowedEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/effectAllowed) - defaults to "all".*
     * `move(e)` - This function will be called when the drag event moves position. *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
     * `end(e)` - This function will be called when the drag event has been either completed or canceled.
 
-**`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. Returns a function that, when called, remove the handlers for those events. 
+**`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. 
 * `domNode` - The domNode to be set as a drop-zone.
 * `options`
     * `allow` - A list of types to allow the event handlers be called for. If this is passed and the current drag operation doesn't have an allowed type, the handlers will not be called. If this isn't passed, all types are allowed.
+* Emitted Events:
     * `enter(types, e)` - A function called when a drag action enters the node
         * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. *Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.* Also note that the data associated with the types is only available in the 'drop' event for security reasons (*imagine if someone was dragging a password from one program to another, but passed over a browser window first*).
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
     * `in(types, e)` - A function called when the dragging pointer crosses in over a child-boundary of a descendant node
     * `move(types, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect). *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
+    	* *Note that `e.dataTransfer.dropEffect` can be set to a [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).*
+    	* *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
     * `out(types, e)` - A function called when the dragging pointer crosses out over a child-boundary of a descendant node
     * `leave(types,e)` - A function called with the dragging pointer moves out of the node or is canceled.
     * `drop(data, e)` - This function will be called when the dragging pointer releases above the node.
@@ -190,6 +195,7 @@ How to submit pull requests:
 
 Change Log
 =========
+* 2.0.0 - Changing to a more standard EventEmitter API. Old API is retained for backwards compatibility.
 * 1.0.3 - Fixing bug where stopPropagation in a drag move event prevented drop
 * 1.0.1
   * Changing `in` and `out` to fire for every child-node boundary crossing (because I don't think drop zones can be programatically detected)

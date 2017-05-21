@@ -6,6 +6,8 @@
     "drag", "drop", "drag-and-drop", "dragndrop", "file upload", "upload"
  ],
  "dependencies":{
+   "proto":"*",
+   "emitter-b": "*"
  },
  "devDependencies": {
      "build-modules":"2"
