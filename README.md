@@ -95,7 +95,7 @@ Using drip-drop:
         * types - The data types available on drop. If any types have the sequence dash-then-lowercase-letter, the type will exist in its original form *and* in a camel cased from. *Eg. `["text", "camel-case"]` will be transformed into `["text", "camel-case", "camelCase"]`.* Also note that the data associated with the types is only available in the 'drop' event for security reasons (*imagine if someone was dragging a password from one program to another, but passed over a browser window first*).
         * `e` - The original [Drag Event object](https://developer.mozilla.org/en-US/docs/Web/API/DragEvent).
     * `in(types, e)` - A function called when the dragging pointer crosses in over a child-boundary of a descendant node
-    * `move(types, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect). *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
+    * `move(types, e)` - This function will be called when the drag event moves position over the drop-zone. The return value of this will be set as the [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).
     	* *Note that `e.dataTransfer.dropEffect` can be set to a [dropEffect](https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/dropEffect).*
     	* *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
     * `out(types, e)` - A function called when the dragging pointer crosses out over a child-boundary of a descendant node
