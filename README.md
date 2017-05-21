@@ -17,16 +17,15 @@ It can be this easy:
 ```javascript
 var dd = require("drip-drop")
 
-dd.drag(myDomNode, {
+var draghandle = dd.drag(myDomNode), {
     image: true, // default drag image
-    start: function(setData, e) {
-        setData('myCustomData', JSON.stringify({a:1, b:"NOT THE BEES"})) // camel case types are allowed!*
-    }
 })
-dd.drop(myDropzone, {
-    drop: function(data, e) {
-        myDropzone.innerHTML = data.myCustomData
-    }
+draghandle.on('start', function(setData, e) {
+    setData('myCustomData', JSON.stringify({a:1, b:"NOT THE BEES"})) // camel case types are allowed!*
+})
+
+dd.drop(myDropzone).on('drop', function(data, e) {
+    myDropzone.innerHTML = data.myCustomData
 })
 ```
 
@@ -117,16 +116,14 @@ Using drip-drop:
 ### File uploading example:
 
 ```javascript
-dd.drop(myDropzone, {
-    drop: function(data, e) {
-        if(data.Files) {
-          data.Files.forEach(function(file) {
-              console.log("Name: "+file.name)
-              console.log("Size: "+file.size)
-              var fileContents = file.getText()
-              // do something with the contents
-          })
-        }
+dd.drop(myDropzone).on('drop', function(data, e) {
+    if(data.Files) {
+      data.Files.forEach(function(file) {
+          console.log("Name: "+file.name)
+          console.log("Size: "+file.size)
+          var fileContents = file.getText()
+          // do something with the contents
+      })
     }
 })
 
@@ -137,19 +134,18 @@ dd.drop(myDropzone, {
 These two functions are basic helper functions for doing the common drag visualization of creating a semi-transparent clone of what you're dragging and moving it along with your mouse.
 
 ```javascript
-var ghostItem;
-dd.drag(myDomNode, {
-    start: function(setData, e) {
-        setData('myCustomData', "Through counter-intelligence it should be possible to pinpoint potential troublemakers, and neutralize them.")
-        ghostItem = dd.ghostItem(myDomNode.parent)
-        document.body.appendChild(ghostItem)
-    }
-    move: function(event) {
-        dd.moveAbsoluteNode(ghostItem, event.pageX, event.pageY)
-    },
-    end: function() {
-        document.body.removeChild(ghostItem)
-    }
+var ghostItem, draghandle = dd.drag(myDomNode)
+
+draghandle.on('start', function(setData, e) {
+    setData('myCustomData', "Through counter-intelligence it should be possible to pinpoint potential troublemakers, and neutralize them.")
+    ghostItem = dd.ghostItem(myDomNode.parent)
+    document.body.appendChild(ghostItem)
+})
+draghandle.on('move', function(event) {
+    dd.moveAbsoluteNode(ghostItem, event.pageX, event.pageY)
+})
+draghandle.on('end', function() {
+    document.body.removeChild(ghostItem)
 })
 ```
 
