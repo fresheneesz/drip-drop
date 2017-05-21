@@ -1,5 +1,5 @@
 {"name":"drip-drop",
- "version":"1.0.3",
+ "version":"2.0.0",
  "main":"drip-drop.js",
  "description": "A simple generalized drag-and-drop module that abstracts away most of the drag-and-drop APIs weirdness and surprises.",
  "keywords": [
