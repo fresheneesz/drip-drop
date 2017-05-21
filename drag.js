@@ -92,9 +92,6 @@ var drag = module.exports = proto(EmitterB, function(superclass) {
         if(options.start) this.on('start', options.start)
         if(options.move) this.on('move', options.move)
         if(options.end) this.on('end', options.end)
-        return function off() {
-            that.removeAllListeners()
-        }
     }
 })
 

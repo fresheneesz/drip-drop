@@ -545,9 +545,6 @@ var drag = module.exports = proto(EmitterB, function(superclass) {
         if(options.start) this.on('start', options.start)
         if(options.move) this.on('move', options.move)
         if(options.end) this.on('end', options.end)
-        return function off() {
-            that.removeAllListeners()
-        }
     }
 })
 
@@ -595,6 +592,7 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
     this.init = function (node, options) {
         var that = this
         superclass.init.call(this)
+        if(!options) options = {}
 
         if (options.allow) {
             var allowed = options.allow
@@ -699,9 +697,6 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
         if(options.in) this.on('in', options.in)
         if(options.out) this.on('out', options.out)
         if(options.drop) this.on('drop', options.drop)
-        return function () {
-            that.removeAllListeners()
-        }
     }
 })
 

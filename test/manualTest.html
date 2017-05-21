@@ -60,46 +60,44 @@
     var hoInner = document.getElementById('hoInner')
 
 
-    var ghostItem;
-    dripDrop.drag(hi, {
-        start: function(setData, e) {
-            console.log('start')
-            setData("B", "NOT THE BEES")
+    var ghostItem, draghandle = dripDrop.drag(hi)
 
-            ghostItem = dripDrop.ghostItem(hi.parentNode)
-            document.body.appendChild(ghostItem)
-        },
-        move: function(e) {
-            console.log('drag move')
-            dripDrop.moveAbsoluteNode(ghostItem, e.pageX, e.pageY)
-        },
-        end: function() {
-            console.log('end')
-            document.body.removeChild(ghostItem)
-        }
+    draghandle.on('start', function(setData, e) {
+        console.log('start')
+        setData("B", "NOT THE BEES")
+
+        ghostItem = dripDrop.ghostItem(hi.parentNode)
+        document.body.appendChild(ghostItem)
+    })
+    draghandle.on('move', function(e) {
+        console.log('drag move')
+        dripDrop.moveAbsoluteNode(ghostItem, e.pageX, e.pageY)
+    })
+    draghandle.on('end', function() {
+        console.log('end')
+        document.body.removeChild(ghostItem)
     })
     
-    dripDrop.drop(ho, {
-        enter: function() {
-            console.log("enter")
-        },
-        leave: function() {
-            console.log("leave")
-        },
-        move: function() {
-            console.log('drop move')
-        },
-        drop: function(data) {
-            if(console.dir) console.dir(data)
-            console.log('drop: '+data.B)
+    var dropzone = dripDrop.drop(ho)
+    dropzone.on('enter', function() {
+        console.log("enter")
+    })
+    dropzone.on('leave', function() {
+        console.log("leave")
+    })
+    dropzone.on('move', function() {
+        console.log('drop move')
+    })
+    dropzone.on('drop', function(data) {
+        if(console.dir) console.dir(data)
+        console.log('drop: '+data.B)
 
-            hoInner.innerHTML = "dropped: "+data.B
-            hoInner.style.backgroundColor = 'teal'
-            setTimeout(function() {
-                hoInner.innerHTML = "Drop here"
-                hoInner.style.backgroundColor = 'transparent'
-            }, 2000)
-        }
+        hoInner.innerHTML = "dropped: "+data.B
+        hoInner.style.backgroundColor = 'teal'
+        setTimeout(function() {
+            hoInner.innerHTML = "Drop here"
+            hoInner.style.backgroundColor = 'transparent'
+        }, 2000)
     })
 
 

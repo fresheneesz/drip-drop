@@ -67,7 +67,7 @@ dripDrop; // drip-drop.umd.js can define dripDrop globally if you really
 
 Using drip-drop:
 
-**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. 
+**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. Returns an (EmitterB)[https://github.com/Tixit/EmitterB] instance that emits the drag events described below.
 * `domNode` - The domNode to be set as a drag source (you can then drag from that element).
 * `options`
     * `image` - Can take on one of the following possible values:
@@ -85,7 +85,7 @@ Using drip-drop:
     * `move(e)` - This function will be called when the drag event moves position. *Note that the pointer position can be grabbed from `e.pageX` and `e.pageY`.*
     * `end(e)` - This function will be called when the drag event has been either completed or canceled.
 
-**`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. 
+**`dd.drop(domNode, options)`** - Sets up drop-related events on the `domNode`. Returns an (EmitterB)[https://github.com/Tixit/EmitterB] instance that emits the drag events described below.
 * `domNode` - The domNode to be set as a drop-zone.
 * `options`
     * `allow` - A list of types to allow the event handlers be called for. If this is passed and the current drag operation doesn't have an allowed type, the handlers will not be called. If this isn't passed, all types are allowed.
@@ -191,7 +191,7 @@ How to submit pull requests:
 
 Change Log
 =========
-* 2.0.0 - Changing to a more standard EventEmitter API. Old API is retained for backwards compatibility.
+* 2.0.1 - *BREAKING CHANGE* Changing to a more standard EventEmitter API. Old API is retained for backwards compatibility except that the return value is now an emitter rather than a function that removes the drag handlers.
 * 1.0.3 - Fixing bug where stopPropagation in a drag move event prevented drop
 * 1.0.1
   * Changing `in` and `out` to fire for every child-node boundary crossing (because I don't think drop zones can be programatically detected)
