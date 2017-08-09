@@ -119,7 +119,7 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
         })
 
         this.ifoff('move', function() {
-            document.removeEventListener('dragover', dropInfo.docover)
+            dropInfo.node.removeEventListener('dragover', dropInfo.over)
         })
         this.ifoff('drop', function() {
             dropInfo.node.removeEventListener('drop', dropInfo.drop)

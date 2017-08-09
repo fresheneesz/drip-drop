@@ -80,12 +80,12 @@ var drag = module.exports = proto(EmitterB, function(superclass) {
         this.ifoff('start', function() {
             dragInfo.node.removeEventListener('dragstart', dragInfo.start)
         })
-        this.ifoff('end', function() {
-            dragInfo.node.removeEventListener('dragend', dragInfo.end)
-        })
         this.ifoff('move', function() {
             moveHandlerExists = false
             if(dragInfo.docOver) document.removeEventListener('dragover', dragInfo.docOver, true)
+        })
+        this.ifoff('end', function() {
+            dragInfo.node.removeEventListener('dragend', dragInfo.end)
         })
 
         // deprecated

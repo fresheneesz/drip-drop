@@ -166,6 +166,11 @@ Support
 Drip drop should work on all desktop browsers. However, Android and iOS browsers don't support the html5 drag and drop API for touch events.
 So if you want to translate touch events into html5 drag events, you can do that with a polyfill. See here: https://www.codeproject.com/Articles/1091766/Add-support-for-standard-HTML-Drag-and-Drop-operat
 
+Known issues
+============
+
+* Chrome and Opera seem to have a bug where the 'dragend' will sometime fail to fire if the domNode being dragged is detached from the dom while being dragged. https://bugs.chromium.org/p/chromium/issues/detail?id=737691
+
 Todo
 ======
 
