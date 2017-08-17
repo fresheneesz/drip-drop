@@ -166,13 +166,11 @@ Tricks
 If you want to detect when drag events are occuring and when they end, set up `drag` events on the document body:
 
 ```javascript
-dd.drag(document.body, {
-    start: function() {
-        // dragging has started somewhere
-    },
-    end: function() {
-        // dragging has ended somewhere (works even if dragging ended off screen)
-    }
+document.body.addEventListener('dragstart', function() {
+    // dragging has started somewhere
+})
+document.body.addEventListener('dragend', function() {
+    // dragging has ended somewhere (works even if dragging ended off screen)
 })
 ```
 
