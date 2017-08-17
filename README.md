@@ -160,6 +160,23 @@ draghandle.on('end', function() {
 * Only 6 event-types to care about (rather than the 8 from the spec)
 * Provides an easy and obvious way to make changes related to the source element on-pointer-move (drag's 'move' event)
 
+Tricks
+=======
+
+If you want to detect when drag events are occuring and when they end, set up `drag` events on the document body:
+
+```javascript
+dd.drag(document.body, {
+    start: function() {
+        // dragging has started somewhere
+    },
+    end: function() {
+        // dragging has ended somewhere (works even if dragging ended off screen)
+    }
+})
+```
+
+
 Support
 ========
 
@@ -169,10 +186,13 @@ So if you want to translate touch events into html5 drag events, you can do that
 Known issues
 ============
 
-* Chrome and Opera seem to have a bug where the 'dragend' will sometime fail to fire if the domNode being dragged is detached from the dom while being dragged. https://bugs.chromium.org/p/chromium/issues/detail?id=737691
+* Chrome and Opera seem to have a bug where the 'dragend' will sometime fail to fire if an iframe is move within or attached to the DOM. https://bugs.chromium.org/p/chromium/issues/detail?id=737691
+** To work around this, wait until dragging has stopped to manipulate iframes (see the `Tricks` section)
 
 Todo
 ======
+
+* Capture-phase drag events
 
 How to Contribute!
 ============
