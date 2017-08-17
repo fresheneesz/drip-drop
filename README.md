@@ -106,7 +106,7 @@ Using drip-drop:
                 * `getBuffer(errback)` - Returns a Buffer of the file contents in a call to the the errback.
              * For any other type, the value is a string of data in a format depending on the type
 
-**`dd.dontPreventDefault`** - Unsets some document-level handlers that prevent the defaults for 'dragenter' and 'dragover'. If you call this, you will need to call `event.preventDefault()` in the appropriate `dd.drop` 'event' and 'move' handlers.
+**`dd.dontPreventDefault()`** - Unsets some document-level handlers that prevent the defaults for 'dragenter' and 'dragover'. If you call this, you will need to call `event.preventDefault()` in the appropriate `dd.drop` 'event' and 'move' handlers.
 
 **`dd.ghostItem(domNode[, zIndex])`** - Returns a semi-transparent clone of the passed dom node ready to be moved with `dd.moveAbsoluteNode`.  
 * zIndex - (Default: 1000) - The zIndex to give to the returned clone.
