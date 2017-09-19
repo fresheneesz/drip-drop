@@ -674,7 +674,7 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
 
                 node.addEventListener('drop', dropInfo.enterLeaveDropHandler = function (e) {
                     dragCounter = 0 // reset
-                })
+                }, true) // capture event to ensure this happens regardless of stop propogation calls
             }
         })
         this.ifoff(function(event) {
