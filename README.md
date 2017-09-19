@@ -214,6 +214,7 @@ How to submit pull requests:
 
 Change Log
 =========
+* 2.0.2 - Fixing bug where enter and leave would stop working if you didn't have a drop handler and dropped onto that dropzone
 * 2.0.1 - *BREAKING CHANGE* Changing to a more standard EventEmitter API. Old API is retained for backwards compatibility except that the return value is now an emitter rather than a function that removes the drag handlers.
 * 1.0.3 - Fixing bug where stopPropagation in a drag move event prevented drop
 * 1.0.1

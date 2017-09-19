@@ -77,8 +77,6 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
                     var data = buildDataObject(e.dataTransfer)
                     that.emit('drop', data, e)
                 }
-
-                dragCounter = 0 // reset
             })
         })
 
@@ -108,6 +106,10 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
                         that.emit('out', curTypes, e)
                     }
                 })
+
+                node.addEventListener('drop', dropInfo.enterLeaveDropHandler = function (e) {
+                    dragCounter = 0 // reset
+                })
             }
         })
         this.ifoff(function(event) {
@@ -115,6 +117,7 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
             if(!anyEventActive(activeEvents)) {
                 dropInfo.node.removeEventListener('dragenter', dropInfo.start)
                 dropInfo.node.removeEventListener('dragleave', dropInfo.end)
+                dropInfo.node.removeEventListener('drop', dropInfo.enterLeaveDropHandler)
             }
         })
 

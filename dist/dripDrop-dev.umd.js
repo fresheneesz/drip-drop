@@ -533,12 +533,12 @@ var drag = module.exports = proto(EmitterB, function(superclass) {
         this.ifoff('start', function() {
             dragInfo.node.removeEventListener('dragstart', dragInfo.start)
         })
-        this.ifoff('end', function() {
-            dragInfo.node.removeEventListener('dragend', dragInfo.end)
-        })
         this.ifoff('move', function() {
             moveHandlerExists = false
             if(dragInfo.docOver) document.removeEventListener('dragover', dragInfo.docOver, true)
+        })
+        this.ifoff('end', function() {
+            dragInfo.node.removeEventListener('dragend', dragInfo.end)
         })
 
         // deprecated
@@ -642,8 +642,6 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
                     var data = buildDataObject(e.dataTransfer)
                     that.emit('drop', data, e)
                 }
-
-                dragCounter = 0 // reset
             })
         })
 
@@ -673,6 +671,10 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
                         that.emit('out', curTypes, e)
                     }
                 })
+
+                node.addEventListener('drop', dropInfo.enterLeaveDropHandler = function (e) {
+                    dragCounter = 0 // reset
+                })
             }
         })
         this.ifoff(function(event) {
@@ -680,11 +682,12 @@ var drop = module.exports = proto(EmitterB, function(superclass) {
             if(!anyEventActive(activeEvents)) {
                 dropInfo.node.removeEventListener('dragenter', dropInfo.start)
                 dropInfo.node.removeEventListener('dragleave', dropInfo.end)
+                dropInfo.node.removeEventListener('drop', dropInfo.enterLeaveDropHandler)
             }
         })
 
         this.ifoff('move', function() {
-            document.removeEventListener('dragover', dropInfo.docover)
+            dropInfo.node.removeEventListener('dragover', dropInfo.over)
         })
         this.ifoff('drop', function() {
             dropInfo.node.removeEventListener('drop', dropInfo.drop)

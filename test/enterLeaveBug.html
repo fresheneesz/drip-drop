@@ -1,0 +1,49 @@
+<head>
+<body>
+    <div id="dragme">
+        dragme
+    </div>
+    <div id="dropzone">
+        Drag over here
+    </div>
+</body>
+<style>
+    body {
+        margin: 0;
+    }
+    #dragme {
+        background-color: green;
+        text-align: center;
+        height: 50px;
+        color: white;
+    }
+    #dropzone {
+        background-color: red;
+        text-align: center;
+        height: 50px;
+    }
+</style>
+<script src="../dist/dripDrop-dev.umd.js"></script>
+<script>
+    // The bug was that if you only had an 'enter' or 'leave' handler (and no 'drop' handler), enter and leave would stop working if you dropped onto that location
+
+    var dragmeNode = document.getElementById('dragme')
+    var dropzoneNode = document.getElementById('dropzone')
+
+
+    var draghandle = dripDrop.drag(dragmeNode)
+    var dropzone = dripDrop.drop(dropzoneNode)
+
+    draghandle.on('start', function(setData, e) {
+        setData('layoutDrag', 'wef')
+    })
+
+    dropzone.on('enter', function() {
+        console.log('drop enter')
+    })
+    dropzone.on('leave', function() {
+        console.log("leave")
+    })
+</script>
+
+</head>
