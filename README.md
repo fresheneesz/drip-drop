@@ -67,7 +67,7 @@ dripDrop; // drip-drop.umd.js can define dripDrop globally if you really
 
 Using drip-drop:
 
-**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. Returns an (EmitterB)[https://github.com/Tixit/EmitterB] instance that emits the drag events described below.
+**`dd.drag(domNode, options)`** - Sets up drag-related events on the `domNode`. Returns an [EmitterB](https://github.com/Tixit/EmitterB) instance that emits the drag events described below.
 * `domNode` - The domNode to be set as a drag source (you can then drag from that element).
 * `options`
     * `image` - Can take on one of the following possible values:
